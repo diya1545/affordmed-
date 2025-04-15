@@ -16,16 +16,14 @@ const slidingWindows = {
 };
 
 const expiresIn = 1744702723;
-const currentTime = Math.floor(Date.now() / 1000); // current Unix time in seconds
+const currentTime = Math.floor(Date.now() / 1000); 
 
 if (currentTime > expiresIn) {
-  console.log("⚠️ Token has expired");
+  console.log("Token has expired");
 } else {
-  console.log("✅ Token is still valid");
+  console.log("Token is still valid");
 }
 
-
-// Mapping for API endpoints
 const apiMap = {
   p: 'http://20.244.56.144/evaluation-service/primes',
   f: 'http://20.244.56.144/evaluation-service/fibo',
@@ -47,15 +45,15 @@ app.get('/numbers/:numberid', async (req, res) => {
     const response = await axios.get(apiURL, {
         timeout: API_TIMEOUT,
         auth: {
-          username: 'PwzufG',  // Username if Basic Auth is required
-          password: ''  // Leave password blank unless specified
+          username: 'PwzufG',  
+          password: '' 
         }
       });
       
       
     const fetchedNumbers = response.data.numbers || [];
 
-    // Update sliding window with unique new numbers
+
     const currentSet = new Set(slidingWindows[type]);
     for (let num of fetchedNumbers) {
       if (!currentSet.has(num)) {
